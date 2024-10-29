@@ -1,9 +1,9 @@
 
 # react-native-boot-screen
 
-Display a splash screen on your app starts. Hide it when you want.
+Display a full-screen splash screen when your app starts. Hide it whenever you want.
 
-
+This library is a modified version based on [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash) and can be used for react-native >= 0.76.
 
 ### Installation
 
