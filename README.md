@@ -8,9 +8,9 @@ Display a splash screen on your app starts. Hide it when you want.
 ### Installation
 
 ```
-$ npm install --save react-native-bootscreen
+$ npm install --save react-native-boot-screen
 # --- or ---
-$ yarn add react-native-bootscreen
+$ yarn add react-native-boot-screen
 ```
 
 ### iOS
