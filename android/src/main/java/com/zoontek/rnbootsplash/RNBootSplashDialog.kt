@@ -5,6 +5,11 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.WindowManager
 
+import android.view.Window
+import android.graphics.Color
+import android.os.Build
+import android.view.View
+
 import androidx.annotation.StyleRes
 
 class RNBootSplashDialog(
@@ -56,24 +61,43 @@ class RNBootSplashDialog(
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
     window?.apply {
-      setLayout(
-        WindowManager.LayoutParams.MATCH_PARENT,
-        WindowManager.LayoutParams.MATCH_PARENT
-      )
+      setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
 
       setWindowAnimations(
-        when {
-          fade -> R.style.BootSplashFadeOutAnimation
-          else -> R.style.BootSplashNoAnimation
-        }
+        if (fade) R.style.BootSplashFadeOutAnimation else R.style.BootSplashNoAnimation
       )
 
       if (RNBootSplashModuleImpl.isSamsungOneUI4()) {
         setBackgroundDrawableResource(R.drawable.compat_splash_screen_oneui_4)
       }
-    }
 
-    super.onCreate(savedInstanceState)
+      if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
+        setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true)
+      }
+
+      if (Build.VERSION.SDK_INT >= 19) {
+        decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+      }
+
+      if (Build.VERSION.SDK_INT >= 21) {
+        setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
+        statusBarColor = Color.TRANSPARENT
+      }
+    }
+  }
+
+  private fun setWindowFlag(bits: Int, on: Boolean) {
+    window?.let { win ->
+      val winParams = win.attributes
+      winParams.flags = if (on) {
+        winParams.flags or bits
+      } else {
+        winParams.flags and bits.inv()
+      }
+      win.attributes = winParams
+    }
   }
 }
