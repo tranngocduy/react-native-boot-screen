@@ -14,6 +14,12 @@ $ yarn add react-native-boot-screen
 ```
 
 ### iOS
+
+```
+$ cd ios
+$ pod install
+```
+
 Edit the `ios/YourApp/AppDelegate.mm` file:
 
 ```obj-c
