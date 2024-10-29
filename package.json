@@ -1,8 +1,8 @@
 {
-  "name": "react-native-bootsplash",
-  "version": "6.2.5",
+  "name": "react-native-boot-screen",
+  "version": "1.0.0",
   "license": "MIT",
-  "description": "Display a bootsplash on your app starts. Hide it when you want.",
+  "description": "Display a splash screen on your app starts. Hide it when you want.",
   "author": "Mathieu Acthernoene <zoontek@gmail.com>",
   "homepage": "https://github.com/zoontek/react-native-bootsplash",
   "main": "dist/commonjs/index.js",
